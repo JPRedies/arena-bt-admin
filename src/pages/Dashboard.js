@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 
@@ -6,6 +7,7 @@ const HORARIOS = ['16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30
 const QUADRAS = ['Quadra 1','Quadra 2','Quadra 3','Quadra 4','Quadra 5','Quadra 6','Quadra 7'];
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const { usuario, logout } = useAuth();
   const [reservas, setReservas] = useState([]);
   const [bloqueios, setBloqueios] = useState([]);
@@ -75,13 +77,13 @@ export default function Dashboard() {
         </div>
         <div style={styles.sidebarNav}>
           {[
-            { label: 'Agenda do dia', ativo: true },
-            { label: 'Reservas' },
-            { label: 'Quadras' },
-            { label: 'Usuários' },
-            { label: 'Bloqueios' },
+            { label: 'Agenda do dia', rota: '/dashboard', ativo: true },
+            { label: 'Reservas', rota: '/reservas' },
+            { label: 'Quadras', rota: '/quadras' },
+            { label: 'Usuários', rota: '/usuarios' },
+            { label: 'Bloqueios', rota: '/bloqueios' },
           ].map((item) => (
-            <div key={item.label} style={{ ...styles.navItem, ...(item.ativo ? styles.navAtivo : {}) }}>
+            <div key={item.label} onClick={() => navigate(item.rota)} style={{ ...styles.navItem, ...(item.ativo ? styles.navAtivo : {}) }}>
               {item.label}
             </div>
           ))}

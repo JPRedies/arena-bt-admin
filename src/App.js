@@ -2,6 +2,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Reservas from './pages/Reservas';
+import Quadras from './pages/Quadras';
+import Usuarios from './pages/Usuarios';
+import Bloqueios from './pages/Bloqueios';
 
 function RotaProtegida({ children }) {
   const { usuario, carregando } = useAuth();
@@ -21,7 +25,27 @@ function App() {
               <Dashboard />
             </RotaProtegida>
           } />
+          <Route path="/reservas" element={
+            <RotaProtegida>
+              <Reservas />
+            </RotaProtegida>
+          } />
           <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="/quadras" element={
+            <RotaProtegida>
+              <Quadras />
+            </RotaProtegida>
+          } />
+          <Route path="/usuarios" element={
+            <RotaProtegida>
+              <Usuarios />
+            </RotaProtegida>
+          } />
+          <Route path="/bloqueios" element={
+            <RotaProtegida>
+              <Bloqueios />
+            </RotaProtegida>
+          } />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
